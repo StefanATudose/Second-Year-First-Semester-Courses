@@ -1,0 +1,23 @@
+﻿
+<h1>Afisare bilet</h1>
+
+@if (TempData.ContainsKey("message") != null)
+{
+    <h2>@ViewBag.message</h2>
+}
+
+        <hr />
+        <h3>Titlu bilet: @ViewBag.ticket.TitluBilet</h3>
+        <h3>Pret: @ViewBag.ticket.Pret</h3>
+        <h3>Data: @ViewBag.ticket.Data</h3>
+        <h3>Titlu film: @ViewBag.ticket.TitluFilm</h3>
+        <a class="btn btn-danger" href="/Tickets/Edit/" + @ViewBag.id>Editare bilet</a>
+
+        @using (Html.BeginForm(controllerName: "Tickets", actionName: "Delete", method: FormMethod.Post, routeValues: new{id = ViewBag.id}))
+        {
+            <button type = "submit">Sterge bilet</button>
+    
+        }
+       
+        <hr />
+    

@@ -1,0 +1,72 @@
+﻿<h1> @ViewBag.grup.Name</h1>
+<h2>Member list</h2>
+
+
+
+<!--doar mod/admin-->
+<br>
+<a class="btn alert-success" href = "/Groups/NonMembersList/@ViewBag.grup.Group_ID">Manually add members</a>
+<br>
+<hr>
+<h2>Pending users</h2>
+
+@if (@ViewBag.pending != null)
+    {
+        foreach (var mem in @ViewBag.pending)
+        {
+            <h3>@mem.UserName</h3>
+            
+
+            @*<a class="btn alert-success" href="Administration/AdmitPending/@mem.ID/@ViewBag.grup.Group_ID">Admit to group</a>*@
+            @using (Html.BeginForm(actionName: "AdmitPending", controllerName: "Administration", routeValues: new { id = @ViewBag.grup.Group_ID, idMem = @mem.idd }))
+            {
+                <button class="btn alert-success" type="submit"> Admit to group</button>
+            }
+
+
+
+            @*<a class="btn btn-danger" href="Administration/RefusePending/@mem.ID/@ViewBag.grup.Group_ID">Deny request</a>*@
+            @using (Html.BeginForm(actionName: "RefusePending", controllerName: "Administration", routeValues: new { id = @ViewBag.grup.Group_ID, idMem = @mem.idd }))
+            {
+                <button class="btn alert-success" type="submit"> Deny request.</button>
+            }
+
+
+
+            <br />
+            <hr>
+        }
+    }
+<hr>
+
+<h2>Group members</h2>
+@if (@ViewBag.mems != null){
+    foreach (var mem in @ViewBag.mems){
+        <h3>@mem.UserName</h3>
+        @if (mem.isMod == 1)
+        {
+            <h4>Is moderator</h4>
+        }
+        else
+        {
+            <h4>Is not moderator</h4>
+        }
+        @using (Html.BeginForm(actionName: "ToggleModerator", controllerName: "Administration", routeValues: new { id = @ViewBag.grup.Group_ID, idMem = @mem.idd }))
+        {
+            <button class="btn alert-success" type="submit"> Toggle moderator status</button>
+        }
+
+        @*<a class="btn alert-success" href="Administration/KickFromGroup/@mem.ID/@ViewBag.grup.Group_ID">Remove from group</a>*@
+        @using (Html.BeginForm(actionName: "KickFromGroup", controllerName: "Administration", routeValues: new { id = @ViewBag.grup.Group_ID, idMem = @mem.idd}))
+        {
+            <button class="btn alert-success" type="submit"> Remove from group</button>
+        }
+
+
+        <br />
+        <hr>
+    }
+}
+else{
+    <h4>The group contains no members</h4>
+}

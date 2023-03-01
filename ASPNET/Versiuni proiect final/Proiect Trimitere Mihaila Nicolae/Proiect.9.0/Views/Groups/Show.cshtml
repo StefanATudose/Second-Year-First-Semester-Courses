@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.Title = "Show Group";
+    Layout = "~/Views/Shared/_LayoutProject.cshtml";
+}
+@model Proiect.Models.Group
+
+<h2>@ViewBag.Title</h2>
+
+<br />
+<h1>Group Title</h1>
+<h2>@Model.Name</h2>
+<br />
+
+<h3>Description</h3>
+<p>@Model.Description</p>
+<br />
+<p>Creation date : @Model.Gr_CreatedDate</p>
+
+@if (TempData.ContainsKey("message"))
+{
+    <h1>@ViewBag.message</h1>
+}
+
+
+@if (User.IsInRole("Admin") || ViewBag.mod == 1){
+    <a class="btn alert-success" href="/Groups/Edit/@Model.Group_ID">Edit Group</a>
+}
+
+
+
+@if (ViewBag.isMem == 0 && ViewBag.isPending == 0){
+    @using (Html.BeginForm(actionName: "AddToPending", controllerName: "Administration",
+                                                             method: FormMethod.Post,
+                                                             routeValues: new
+                                                             {
+                                                                 id = Model.Group_ID,
+                                                                 idMem = ViewBag.userId
+                                                             }))
+    {
+        <button class="btn btn-danger" type="submit">Apply for group membership</button>
+    }
+}
+
+@if (User.IsInRole("Admin") || ViewBag.mod == 1){
+    <form method="post" action="/Groups/Delete/@Model.Group_ID">
+
+        <button class="btn btn-danger" type="submit">Delete Group</button>
+
+    </form>
+}
+
+
+<a class = "btn alert-success" href = "/Groups/ShowMem/@Model.Group_ID">See group members</a>
+
+
+<hr>
+
+@if (ViewBag.isMem == 1)
+{
+    <h4>List of all messages</h4>
+    @using (Html.BeginForm(actionName: "New", controllerName: "Messages", method: FormMethod.Get, routeValues: new { id = Model.Group_ID, idMem = ViewBag.userId }))
+    {
+        <button class="btn alert-success" type="submit"> Add a new message</button>
+    }
+}
+@if (ViewBag.noMessages != 0){
+    <h2>Group messages</h2>
+    @foreach (var msg in ViewBag.messages)
+    {
+        <hr>
+        <h4>Author: @msg.creator</h4>
+        <p>Date posted: @msg.createdDate</p>
+        <p>Text: @msg.text</p>
+        @if (msg.creatorId == ViewBag.userId)
+        {
+            <a class="btn alert-success" href="/Messages/Edit/@msg.idd">Edit</a>
+        }
+
+
+        @if (User.IsInRole("Admin") || ViewBag.mod == 1 || msg.creatorId == ViewBag.userId)
+        {
+            <a class="btn alert-success" href="/Messages/Delete/@msg.idd">Delete</a>
+        }
+        <hr>
+    }
+}
+else{
+    <h2>The group contains no messages at the moment.</h2>
+}
+
+
+
+
+<!-- asta nu prea respecta schema din paint, stabiliseram parca ca afisam membrii pe alta pagina
+    pagina show era destinata comentariilor din grup
+<h1>Group members</h1>
+@*if(ViewBag.MemGrup != null)
+    @foreach(var memGr in ViewBag.MemGrup) //Aici afisam membrii grupului
+    {
+        <p>@memGr.UserName</p>
+        //buton pentru make moderator
+
+        @using (Html.BeginForm(actionName: "MakeModerator", controllerName: "Administration",
+                                     method: FormMethod.Post,
+                                     routeValues: new
+                                     {
+                                         id_grup = Model.Group_ID,
+                                         id_mem = memGr.Id
+                                     }
+                                    )
+                     )
+        {
+            <button class="btn btn-danger" type="submit">Make moderator</button>
+        }
+
+        //buton pentru delete membru
+        @using (Html.BeginForm(actionName: "KickFromGroup", controllerName: "Administration",
+                                                     method: FormMethod.Post,
+                                                     routeValues: new
+                                                     {
+                                                         id_grup = Model.Group_ID,
+                                                         id_mem = memGr.Id
+                                                     }
+                                                    )
+                                     )
+        {
+            <button class="btn btn-danger" type="submit">Kick member</button>
+        }   
+
+    }
+else
+    {
+        <p>This Group has no members</p>
+    }
+<br />
+@if (ViewBag.MemAll != null)
+{
+    <h1>List of all users</h1>
+    @foreach (var mem in ViewBag.MemAll) //Aici afisam membrii INTREGII PLATFORME
+    {
+        <p>@mem.UserName</p>
+        
+        //buton pentru add to group. Poate merge un TempMessage
+        @using(Html.BeginForm(actionName: "AddToGroup", controllerName: "Administration",
+                              method: FormMethod.Post,
+                              routeValues: new { id_grup = Model.Group_ID, id_mem = mem.Id
+                                                }
+                             )
+              )
+        {
+            <button class="btn btn-danger" type="submit">Add to group</button>
+        }
+
+       
+    }
+    -->
+    /* <form method="post" action="/Administration/AddToGroup/@Model.Group_ID/@mem.Id">
+
+            <button class="btn btn-danger" type="submit">Add to group</button>  Asta e vechiul buton
+            
+        </form>
+
+       *@
+}
+
+<br />
+<a class="btn alert-success" href="/Groups/Index">View list of all Groups</a>
+<br />
+<hr />
+<br />
+
+<!--
+<a class = "btn " <--insert bootstrap style class here href = ""
+-->

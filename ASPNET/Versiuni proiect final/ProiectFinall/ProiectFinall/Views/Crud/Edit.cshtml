@@ -1,0 +1,15 @@
+﻿<h2>Edit group</h2>
+<br />
+<form method="post" action="/Crud/Edit/@ViewBag.Group.Group_ID">
+    <label>Name</label>
+    <br />
+
+    <input type="text" name="Name" value="@ViewBag.Group.Name" />
+    <br /><br />
+    <label>Adresa e-mail</label>
+    <br />
+    <input type="text" name="Email" value="@ViewBag.Group.Description" />
+    <br /><br />
+    <br />
+    <button type="submit">Change group data</button>
+</form>

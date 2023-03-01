@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Add Message";
+    Layout = "~/Views/Shared/_LayoutProject.cshtml";
+}
+
+@model Proiect.Models.Message
+
+<h2>New comment</h2>
+@if (TempData["message"] != null){
+    <h3>@TempData["message"]</h3>
+}
+
+
+@using (Html.BeginForm(actionName: "New", controllerName: "Messages", method: FormMethod.Post))
+{
+
+    @Html.Label("Text", "Message description")
+    <br />
+
+    @Html.TextBox("Text", null, new { @class = "form-control" })
+
+    @Html.Hidden("Group_ID", Model.Group_ID);
+    @Html.Hidden("User_ID", Model.User_ID);
+
+    @Html.ValidationMessageFor(m => m.Text, null, new { @class = "text-danger" })
+    <br />
+    <br />
+
+    <button class="btn btn-success" type="submit">Add message!</button>
+}

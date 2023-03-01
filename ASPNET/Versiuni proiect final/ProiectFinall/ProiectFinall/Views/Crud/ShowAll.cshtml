@@ -1,0 +1,17 @@
+﻿<h1>Afisare grupuri</h1>
+
+<br />
+
+@foreach (var group in ViewBag.Groups)
+{
+    <p>@group.Name</p>
+    <p>@group.Description</p>
+    <p>@group.Gr_CreatedDate</p>
+    <br />
+    <a href="/Crud/Show/@group.Group_ID">Show individual group</a>
+    <br />
+    <a href="/Crud/Edit/@group.Group_ID">Edit group</a>
+    <hr />
+}
+
+<a href="/Crud/New">Add a new group</a>

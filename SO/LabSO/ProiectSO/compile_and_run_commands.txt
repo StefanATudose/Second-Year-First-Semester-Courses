@@ -1,0 +1,5 @@
+yacc -d shell.y
+lex shell.l
+gcc y.tab.c lex.yy.c -o executabil
+./executabil
+

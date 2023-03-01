@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1666737031 source:c:\toate\facultate\info\an 2 semestru 1\algfund\teme\t1p5\main.cpp
+	<iostream>
+	<fstream>
+	<vector>
+	<queue>
+

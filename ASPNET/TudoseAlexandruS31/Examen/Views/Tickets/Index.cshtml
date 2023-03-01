@@ -1,0 +1,30 @@
+﻿<h1>Index bilete</h1>
+
+@if (ViewBag.showAddMovies == 1){
+    <a class="btn alert-success" href = "/Tickets/AddMovies">Add movies</a>
+}
+
+@if (TempData.ContainsKey("message") != null)
+{
+    <h2>@ViewBag.message</h2>
+}
+
+@if (ViewBag.tickets != null){
+    @foreach(var item in ViewBag.tickets){
+        <hr />
+        <h3>Titlu bilet: @item.TitluBilet</h3>
+        <h3>Pret: @item.Pret</h3>
+        <h3>Data: @item.Data</h3>
+        <h3>Titlu film: @item.TitluFilm</h3>
+        <a class="btn alert-success" href = "/Tickets/Show/" + @item.Id>Afisare bilet</a>
+        @using (Html.BeginForm(controllerName: "Tickets", actionName: "Delete", method: FormMethod.Post, routeValues: new { id = ViewBag.Id }))
+        {
+            <button type="submit">Sterge bilet</button>
+
+        }
+        <hr />
+    }
+}
+else{
+    <h3>Inca nu exista niciun bilet</h3>
+}

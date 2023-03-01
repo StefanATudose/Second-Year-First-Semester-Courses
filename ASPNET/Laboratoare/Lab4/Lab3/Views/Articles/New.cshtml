@@ -1,0 +1,10 @@
+﻿<h2>New article</h2>
+
+@Html.BeginForm(actionName: "Articles", controllerName: "New", method: FormMethod.Get){
+    
+    @Html.Label("Title", "Titlu articol");
+    @Html.TextBox("Title", null, new { @class = "form-control"});
+
+    @Html.Label("Content", "Continut articol");
+    @Html.TextArea("Title", null, new { @class = "form-control"});
+}

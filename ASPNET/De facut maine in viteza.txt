@@ -1,0 +1,5 @@
+-studiat selectList
+-studiat select din calendar
+-studiat date to string/int + string to date
+-studiat motor de cautare
+-facut lab 11 (ce e relevant)

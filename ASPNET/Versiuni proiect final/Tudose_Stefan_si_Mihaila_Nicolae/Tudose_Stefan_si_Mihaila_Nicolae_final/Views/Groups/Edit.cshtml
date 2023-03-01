@@ -1,0 +1,39 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutProject.cshtml";
+    ViewBag.Title = "Edit group";
+}
+
+@model Proiect.Models.Group
+<h2>@ViewBag.Title</h2>
+
+@if (TempData.ContainsKey("message"))
+{
+    <h1>@ViewBag.message</h1>
+}
+
+
+@using (Html.BeginForm(controllerName: "Groups", actionName: "Edit", method: FormMethod.Post,
+       routeValues: new { id = Model.Group_ID }))
+{
+    @Html.Label("Name", "Group Name")
+    <br />
+    @Html.Editor("Name")
+
+    @Html.ValidationMessageFor(m => m.Name,null, new { @class = "text-danger" })
+    <br />
+
+    <br />
+
+    @Html.Label("Description", "Group Description")
+    <br />
+    @Html.Editor("Description")
+
+    @Html.ValidationMessageFor(m => m.Description,null, new { @class = "text-danger" })
+
+    @Html.Hidden("Categ_ID", Model.Categ_ID);
+    <br />
+
+    <br />
+
+    <button class="btn btn-success" type="submit">Edit group</button>
+}

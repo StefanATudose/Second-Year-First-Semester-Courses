@@ -1,0 +1,54 @@
+class Solution {
+public:
+    string shortestCommonSupersequence(string str1, string str2) {
+        
+        const int l1 = str1.length(), l2 = str2.length();
+        int i, j;
+        string revSubseq, subseq, rez;
+        int dp[l1+1][l2+1];
+        memset(dp, 0, sizeof(dp));
+        for (i = 1; i <= l1; ++ i)
+            for (j = 1; j <= l2; ++j)
+                if (str1[i-1] == str2[j-1]){
+                    dp[i][j] = dp[i-1][j-1] + 1;
+                }
+                else{
+                    dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+                }
+        i = l1; j = l2;
+        while (i != 0 && j != 0){
+            if (str1[i-1] == str2[j-1]){
+                revSubseq.push_back(str1[i-1]);
+                --i; --j;
+            }
+            else{
+                int maxu = max(dp[i-1][j], dp[i][j-1]);
+                if (dp[i-1][j] == maxu)
+                    --i;
+                else
+                    --j;
+            }
+        }
+        i = revSubseq.length()-1;
+        for (; i >= 0; --i)
+            subseq.push_back(revSubseq[i]);
+        i = 0; j = 0;
+        for (int k = 0; k < subseq.length(); ++k){
+            while (i < l1 && str1[i] != subseq[k]){
+                rez.push_back(str1[i]);
+                ++i;
+            }
+            while (j < l2 && str2[j] != subseq[k]){
+                rez.push_back(str2[j]);
+                ++j;
+            }
+            rez.push_back(subseq[k]);
+            ++i; ++j;
+        }
+        if (i < l1)
+            rez += str1.substr(i);
+        if (j < l2)
+            rez += str2.substr(j);
+        return rez;
+    }
+};

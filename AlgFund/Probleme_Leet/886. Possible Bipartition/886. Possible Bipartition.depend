@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1665767614 source:c:\toate\facultate\info\an 2 semestru 1\algfund\probleme_leet\886. possible bipartition\main.cpp
+	<iostream>
+	<vector>
+	<cstring>
+

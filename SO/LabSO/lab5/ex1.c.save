@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+	pid_t pid = fork();
+	if (pid < 0)
+		return errno;
+	else if(pid == 0){
+		char *argv[] = {"ls", NULL};
+		execve("/usr/bin/ls", argv, NULL);
+		perror(NULL);
+	}
+	else{
+	}
+	return 0;
+}

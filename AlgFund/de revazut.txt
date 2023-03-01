@@ -1,0 +1,11 @@
+AF
+
+Curs 13 slide 25
+Problema clustering (inclusiv distanta Levishtein)
+Componente biconexe
+
+
+
+
+
+*algoritmul lui dinic

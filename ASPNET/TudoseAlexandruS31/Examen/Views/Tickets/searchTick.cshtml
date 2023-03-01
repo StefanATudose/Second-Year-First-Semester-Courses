@@ -1,0 +1,24 @@
+﻿@if (ViewBag.post == 1){
+    @if (ViewBag.tickets != null){
+        @foreach(var item in ViewBag.tickets){
+            <hr />
+               <h3>pret: @item.titluBilet</h3>
+               <h3>pret: @item.pret</h3>
+               <h3>film: @item.denfilm</h3>
+            <hr />
+        }
+
+        <hr>
+
+        <h2>S-au vandut bilete in valoare de @ViewBag.valoare</h2>
+    }
+    else{
+        <h1>nu exista filmul/nu exista niciun bilet care sa apartina filmului respectiv</h1>
+    }
+}
+else{
+    @using (Html.BeginForm(controllerName: "Tickets", actionName: "searchTick", method: FormMethod.Post)){
+        @Html.TextArea("id", null, new{@class = "form-control"});
+        <button type = "submit"> Search</button>
+    }
+}

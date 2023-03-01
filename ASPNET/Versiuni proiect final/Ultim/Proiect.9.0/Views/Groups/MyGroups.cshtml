@@ -1,0 +1,20 @@
+﻿
+<h1>My groups</h1>
+
+@if (ViewBag.myGroups != null){
+    @foreach (var item in ViewBag.myGroups)
+    {
+        @Html.Label("Name", "Group Name")
+        <p>@item.Name</p>
+        <br />
+        @Html.Label("Description", "Group description")
+        <p>@item.Description</p>
+        <a class="btn alert-success" href="/Groups/Show/@item.Group_ID">Show Group</a>
+        <br />
+        <hr />
+        <br />
+    }
+}
+else{
+    <h1>You have not yet joined any group!</h1>
+}

@@ -1,0 +1,25 @@
+﻿<h1>Adaugare bilet</h1>
+
+@model Examen.Models.Ticket
+
+@using (Html.BeginForm(controllerName: "Tickets", actionName: "New", method: FormMethod.Post)){
+    
+    @Html.Label("TitluBilet", "Titlul Biletului");
+    @Html.TextBox("TitluBilet", null, new { @class= "form-control"});
+    @Html.ValidationMessageFor(m => m.TitluBilet, null, new {@class = "text-danger"});
+
+    @Html.Label("Pret", "Pretul Biletului");
+    @Html.TextBox("Pret", null, new { @class= "form-control"});
+    @Html.ValidationMessageFor(m => m.Pret, null, new {@class = "text-danger"});
+
+    @Html.Label("Data", "Data biletului");
+    @Html.Editor("Data");
+    @Html.ValidationMessageFor(m => m.Data, null, new {@class = "text-danger"});
+
+    @Html.DropDownListFor(m => m.MovieId, new
+    SelectList(Model.Filme, "Value", "Text"),
+    "Selectati filmul", new { @class = "form-control"})
+    @Html.ValidationMessageFor(m => m.MovieId, null, new { @class = "text-danger" })
+
+    <button type = "submit"> Adauga!</button>
+}

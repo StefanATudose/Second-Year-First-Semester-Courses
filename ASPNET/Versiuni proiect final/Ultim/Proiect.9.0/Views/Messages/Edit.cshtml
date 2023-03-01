@@ -1,0 +1,32 @@
+﻿@model Proiect.Models.Message
+
+
+@{
+    ViewBag.Title = "Edit message";
+    Layout = "~/Views/Shared/_LayoutProject.cshtml";
+}
+
+<h2>Edit comment</h2>
+<br />
+
+
+@using (Html.BeginForm(controllerName: "Messages", actionName: "Edit",
+      method: FormMethod.Post, routeValues: new { id = Model.Message_ID }))
+
+{
+    @Html.Label("Text", "Message content")
+
+    <br />
+
+    @Html.Editor("Text", new { @class = "form-control" })
+    <br />
+
+    @Html.ValidationMessage("Text", null, new { @class = "text-danger" })
+
+    <br />
+    <br />
+
+    <button class="btn  btn-primary" type="submit">Edit message</button>
+
+}
+

@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "List of all Groups";
+    Layout = "~/Views/Shared/_LayoutProject.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+@if (TempData.ContainsKey("message"))
+{
+    <h1>@ViewBag.message</h1>
+}
+
+
+<br />
+@if (ViewBag.Groups != null){
+    <div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="/Groups/Index?page=1" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                @for (int i = 1; i <= ViewBag.lastPage; i++)
+                {
+                    <li class="page-item"> <a class="page-link" href="/Groups/Index?page=@i">@(i)</a> </li>
+                }
+                <li class="page-item">
+                    <a class="page-link" href="/Groups/Index?page=@(ViewBag.lastPage)" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <br />
+            </ul>
+        </nav>
+    </div>
+
+    @foreach (var group in ViewBag.Groups)
+    {
+        <h3>@Html.Label("Name", "Group Name")</h3>
+        <p>@group.Name</p>
+        <br />
+        <h3>@Html.Label("Description", "Group description")</h3>
+        <p>@group.Description</p>
+        <a class="btn alert-success" href="/Groups/Show/@group.Group_ID">Show Group</a>
+        <br />
+        <hr />
+        <br />
+    }
+}
+
+
+<br />
+<a class="btn btn-success" href="/Groups/New">Add a new group</a>
+<br />
+
+<br /><!--De facut doar pentru admin-->
+<a class="btn btn-success" href="/Categories/Index">Manager categorii</a>
+<br />
+
+

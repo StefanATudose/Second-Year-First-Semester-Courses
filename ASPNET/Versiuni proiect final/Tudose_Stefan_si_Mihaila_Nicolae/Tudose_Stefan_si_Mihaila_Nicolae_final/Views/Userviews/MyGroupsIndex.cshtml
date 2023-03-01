@@ -1,0 +1,18 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutProject.cshtml";
+    ViewBag.Title = "My groups";
+}
+
+<h2>@ViewBag.Title</h2>
+@if(ViewBag.MyG != null)
+{   
+    @foreach(var gr in ViewBag.MyG)
+    {
+        <p>gr.Group_Name</p>
+        <br />
+    }
+}
+else
+{
+    <p>You have not joined any groups</p>
+}

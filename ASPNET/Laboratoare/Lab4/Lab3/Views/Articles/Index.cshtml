@@ -1,0 +1,13 @@
+﻿
+@foreach (var item in ViewBag.Articles){
+    <hr>
+       <h1>Article Title: @item.Title</h1>
+       <h2>Content: @item.Content</h2>
+       <h2>Date: @item.Date</h2>
+
+       <a href = "/Articles/Show/" + @item.ArticleID>Show article</a>
+        <a href = "/Articles/Edit/" + @item.ArticleID>Edit article</a>
+    <hr>
+}
+
+<a href = "/Articles/New">Add article</a>

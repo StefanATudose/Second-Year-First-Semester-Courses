@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutProject.cshtml";
+    ViewBag.Title = "Moderated groups";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (ViewBag.ModG != null)
+{
+    @foreach(var gr in ViewBag.ModG)
+    {
+        <p>gr.Group_Name</p>
+        <br />
+    }
+}
+else
+{
+    <p>You have not joined any groups</p>
+}
